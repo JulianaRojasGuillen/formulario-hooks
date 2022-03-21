@@ -1,23 +1,63 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react'
+import Informacion from './Componentes/Informacion/Informacion';
 
 function App() {
+  
+  const [datos, setDatos] = useState ( { 
+    firstname: '',
+    lastname: '',
+    email:'',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const cambiarDatos = (e) => {
+    setDatos({
+      ...datos,
+      [e.target.name]: e.target.value
+    });
+  };
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>
+        Formulario
+      </h1>
+      <form>
+        <div>
+          <label htmlFor='firstname'>First Name:</label>
+          <input  type="text" name="firstname"
+                  value={datos.firstname}
+                  onChange ={(e)=>cambiarDatos(e)}></input>
+        </div>
+        <div>
+          <label htmlFor="lastname">Last Name: </label>
+          <input  type="text" name="lastname"
+                  value={datos.lastname}
+                  onChange ={(e)=>cambiarDatos(e)}></input>
+        </div>
+        <div>
+          <label htmlFor="email">Email: </label>
+          <input  type="text" name="email"
+                  value = {datos.email}
+                  onChange ={(e)=>cambiarDatos(e)}></input>
+        </div>
+        <div>
+          <label htmlFor="password">Password: </label>
+          <input  type="password" name="password"
+                  value = {datos.password}
+                  onChange ={(e)=>cambiarDatos(e)}></input>
+        </div>
+        <div>
+          <label htmlFor="confirmPassword">Confirm Password: </label>
+          <input  type="password" name="confirmPassword"
+                  value={datos.confirmPassword}
+                  onChange ={(e)=>cambiarDatos(e)}></input>
+        </div>
+      </form>
+      <Informacion datos = {datos}></Informacion>
     </div>
   );
 }
